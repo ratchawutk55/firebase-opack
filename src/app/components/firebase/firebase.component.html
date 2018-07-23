@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div style="color: blue;">
+    <h1>{{title}}</h1>
+    <h3>{{description}}</h3>
+  </div>
+
+  <div style="width: 300px;">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="item">Item</label>
+        <input type="text" class="form-control" placeholder="Enter content..." id="item" required [(ngModel)]="itemValue" name="item">
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </form>
+  </div>
+  <!-- 
+  <h2>Content from Firebase</h2>
+  <div class="col-md-3">
+    <pre *ngFor="let item of items | async">{{item|json}}</pre>
+  </div> -->
+  <input type="text" class="form-control" placeholder="Enter cat..." id="cat" required [(ngModel)]="cat" name="cat"> {{cat}}
+  <button class="btn btn-success" (click)="onLoad()">Load</button>
+
+</div>
+
+
+<input [(ngModel)]="category.name" />
+<button (click)="onAddCat()">Add Cat</button>
+<div class="col-md-3">
+  <button *ngFor="let item of categories | async" (click)="onCickCat(item)">{{item.name}}</button>
+</div>
+
+<hr>
+<pre>
+{{obj|json}}
+</pre>

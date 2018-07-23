@@ -3,13 +3,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-preview',
+  templateUrl: './preview.component.html',
+  styleUrls: ['./preview.component.css']
 })
-export class ListComponent implements OnInit {
+export class PreviewComponent implements OnInit {
 
-  category: string;
+ category: string;
   id: string;
   constructor(private activatedRoute: ActivatedRoute, public db: AngularFireDatabase, private router: Router) {
 
@@ -25,4 +25,5 @@ export class ListComponent implements OnInit {
   back() {
     this.router.navigate(['/category/' + this.category]);
   }
+
 }

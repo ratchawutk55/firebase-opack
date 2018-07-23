@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
-
+import { Observable } from 'rxjs';
+export interface Item {
+  id: number;
+  name: string;
+  price: number;
+  url: string;
+}
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
@@ -10,11 +16,15 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class CategoryListComponent implements OnInit {
 
   id: string;
-  items: Observable<any[]>;
+  items: Item[];
+  loading: boolean;
   constructor(private activatedRoute: ActivatedRoute, public db: AngularFireDatabase) {
+    this.items = [];
+    // this.dao = new Observable<any[]>();
   }
 
   ngOnInit() {
+    this.loading = true;
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = params.get('id');
     });
@@ -22,12 +32,14 @@ export class CategoryListComponent implements OnInit {
     this.db.database.ref('categories')
       .child(this.id)
       .child('items')
-      .once('value', function (snap) {
-        //console.log('snap', snap.val());
-      }).then(v => {
-        this.items = v.val();
-        
+      .once('value').then(v => {
+        const data = v.val();
+        const keys = Object.keys(v.val());
+        keys.forEach(key => {
+          data[key].url = 'category/' + this.id + '/' + data[key].id;
+          this.items.push(data[key]);
+          this.loading = false;
+        });
       });
   }
-
 }
