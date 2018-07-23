@@ -5,7 +5,11 @@
  -->
 <div class="">
   <div class="list-group">
-    <p class="text-center" *ngIf="loading">Loading....</p>
+    <!-- *ngIf="loading" -->
+    <div class="center" *ngIf="loading">
+      <span class="three-quarters-loader">Loading…</span>
+    </div>
+    
     <a [attr.href]="item.url" class="list-group-item list-group-item-action" *ngFor="let item of items">{{ item.name }}</a>
   </div>
 </div>
