@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "bower_components/css-spinners/css/spinners.css"
             ],
             "scripts": []
           },
